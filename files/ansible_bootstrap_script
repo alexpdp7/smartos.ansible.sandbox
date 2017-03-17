@@ -1,0 +1,34 @@
+# pkgsrc installation from https://pkgsrc.joyent.com/install-on-illumos/
+
+BOOTSTRAP_TAR="bootstrap-2016Q4-tools-20170130.tar.gz"
+BOOTSTRAP_SHA="77f41c9c7ec6ca3300329c35f39fad7c7db07582"
+
+cd /tmp/  # root is on a minimal ramdisk and this does not fit
+
+# Download the bootstrap kit to the current directory.  Note that we currently
+# pass "-k" to skip SSL certificate checks as the GZ doesn't install them.
+curl -kO https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/${BOOTSTRAP_TAR}
+
+# Verify the SHA1 checksum.
+[ "${BOOTSTRAP_SHA}" = "$(/bin/digest -a sha1 ${BOOTSTRAP_TAR})" ] || echo "ERROR: checksum failure"
+
+# Verify PGP signature.  This step is optional, and requires gpg.
+curl -kO https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/${BOOTSTRAP_TAR}.asc
+gpg --recv-keys 0xDE817B8E
+gpg --verify ${BOOTSTRAP_TAR}{.asc,}
+
+# Install bootstrap kit to /opt/tools
+tar -zxpf ${BOOTSTRAP_TAR} -C /
+
+# Add to PATH/MANPATH.
+PATH=/opt/tools/sbin:/opt/tools/bin:$PATH
+MANPATH=/opt/tools/man:$MANPATH
+
+# Install python
+
+/opt/tools/bin/pkgin -y in python27
+
+# cleanup
+
+rm ${BOOTSTRAP_TAR}
+rm ${BOOTSTRAP_TAR}.asc
