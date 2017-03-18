@@ -1,1 +1,1 @@
-smartos ansible_host=smartos ansible_user=root ansible_ssh_pass=root
+smartos ansible_host=smartos ansible_user=root ansible_ssh_pass=root ansible_python_interpreter=/opt/tools/bin/python
