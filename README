@@ -1,0 +1,12 @@
+SmartOS modules are in the devel branch for Ansible 2.3, so you cannot use
+packaged/pip versions.
+
+Create a virtualenv with Python 3 and:
+
+$ pip install -r requirements.txt
+
+You might need to pip install appdirs separately prior to that.
+
+Install Python on SmartOS so it can be managed by Ansible:
+
+$ ansible-playbook -i hosts bootstrap_ansible.yml

@@ -1,0 +1,2 @@
+appdirs
+git+git://github.com/ansible/ansible.git@devel
