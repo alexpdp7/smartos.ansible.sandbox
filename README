@@ -10,3 +10,10 @@ You might need to pip install appdirs separately prior to that.
 Install Python on SmartOS so it can be managed by Ansible:
 
 $ ansible-playbook -i hosts bootstrap_ansible.yml
+
+Create a CentOS 7 LX Zone:
+
+$ ansible-playbook create_centos.yml
+
+(you can use vmadm list to find out the uuid, zlogin <uuid> to enter the
+zone)
