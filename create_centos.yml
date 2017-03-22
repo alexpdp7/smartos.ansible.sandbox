@@ -11,4 +11,11 @@
       kernel_version: 3.10.0
       state: present
       alias: c7
+      hostname: c7
       image_uuid: 23ee2dbc-c155-11e6-ab6d-bf5689f582fd
+      resolvers: 10.76.78.2
+      nics:
+      - nic_tag: admin
+        ip: dhcp
+        primary: true
+        allow_ip_spoofing: true
