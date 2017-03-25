@@ -14,6 +14,9 @@
       hostname: c7
       image_uuid: 23ee2dbc-c155-11e6-ab6d-bf5689f582fd
       resolvers: 10.76.78.2
+      customer_metadata:
+        root_authorized_keys: "{{ lookup('file', 'public.key') }}"
+        user-script: "/usr/sbin/mdata-get root_authorized_keys > ~root/.ssh/authorized_keys ; /usr/sbin/mdata-get root_authorized_keys > ~admin/.ssh/authorized_keys"
       nics:
       - nic_tag: admin
         ip: dhcp

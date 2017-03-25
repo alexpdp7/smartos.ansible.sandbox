@@ -16,4 +16,8 @@ Create a CentOS 7 LX Zone:
 $ ansible-playbook create_centos.yml
 
 (you can use vmadm list to find out the uuid, zlogin <uuid> to enter the
-zone)
+zone and find out its IP, then you can:
+
+$ ssh -i private.key root@<ip>
+
+to ssh to the box with this repo's sample keys)
