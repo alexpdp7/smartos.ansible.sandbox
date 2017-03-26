@@ -19,6 +19,8 @@
         user-script: "/usr/sbin/mdata-get root_authorized_keys > ~root/.ssh/authorized_keys ; /usr/sbin/mdata-get root_authorized_keys > ~admin/.ssh/authorized_keys"
       nics:
       - nic_tag: admin
-        ip: dhcp
+        ip: "{{ hostvars['zone1']['ansible_host'] }}"
+        netmask: 255.255.255.0
+        gateway: 10.76.78.10
         primary: true
         allow_ip_spoofing: true
