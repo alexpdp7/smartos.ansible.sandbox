@@ -11,14 +11,18 @@ Install Python on SmartOS so it can be managed by Ansible:
 
 $ ansible-playbook -i hosts bootstrap_ansible.yml
 
-Create a CentOS 7 LX Zone:
-
-$ ansible-playbook create_centos.yml
-
-You should now be able to access it with Ansible's inventory:
-
-$ ansible -m ping zone1
-
 Create an etherstub:
 
 $ ansible-playbook setup_etherstub.yml
+
+Create a pair of CentOS 7 LX Zones:
+
+$ ansible-playbook create_centos.yml
+
+You should now be able to access zone1 with Ansible's inventory:
+
+$ ansible -m ping zone1
+
+And access the internal zone2 through zone1:
+
+$ ssh -i private.key -o ProxyCommand="ssh -i private.key -W %h:%p root@10.76.78.11" root@10.76.79.2
