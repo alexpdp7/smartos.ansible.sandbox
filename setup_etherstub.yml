@@ -1,0 +1,9 @@
+---
+- hosts: smartos
+  tasks:
+  - name: setup_etherstub
+    lineinfile:
+      path: /usbkey/config
+      line: 'etherstub=switch0'
+  - name: reload_config
+    command: sysinfo -u

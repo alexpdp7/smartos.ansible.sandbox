@@ -18,3 +18,7 @@ $ ansible-playbook create_centos.yml
 You should now be able to access it with Ansible's inventory:
 
 $ ansible -m ping zone1
+
+Create an etherstub:
+
+$ ansible-playbook setup_etherstub.yml
