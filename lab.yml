@@ -30,10 +30,7 @@
   roles:
     - role: centos_zone
       host_name: zone1
-      resolvers: [ "8.8.8.8" ]
       nics:
       - nic_tag: switch0
-        ip: 192.168.101.2
-        netmask: 255.255.255.0
-        gateway: "{{ hostvars['smartos_bastion']['internal_network_ip'] }}"
+        ip: dhcp
         primary: true

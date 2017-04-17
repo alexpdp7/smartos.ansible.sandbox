@@ -2,6 +2,18 @@
 - name: setup nat eth0
   command: firewall-cmd --change-interface eth0 --zone external
 - name: setup nat eth1
-  command: firewall-cmd --change-interface eth1 --zone internal
+  command: firewall-cmd --change-interface eth1 --zone trusted
 - name: reload firewall
   command: firewall-cmd --reload
+- name: install dnsmasq
+  package:
+    name: dnsmasq
+    state: present
+- name: dnsmasq.conf
+  template:
+    src: dnsmasq.conf.j2
+    dest: /etc/dnsmasq.conf
+- name: restart dnsmasq
+  service:
+    name: dnsmasq
+    state: restarted

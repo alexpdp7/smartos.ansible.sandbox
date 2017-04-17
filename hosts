@@ -1,5 +1,5 @@
 smartos         ansible_host=192.168.100.2 ansible_user=root ansible_ssh_pass=root ansible_python_interpreter=/opt/tools/bin/python
-smartos_bastion ansible_host=192.168.100.3 ansible_user=root internal_network_ip=192.168.101.1 gateway=192.168.100.1
+smartos_bastion ansible_host=192.168.100.3 ansible_user=root internal_network_ip=192.168.101.1 gateway=192.168.100.1 domain=test.pdp7.net dhcp_range=192.168.101.100,192.168.101.200
 
 [internal]
 zone1           ansible_host=192.168.101.2 ansible_user=root
