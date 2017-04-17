@@ -1,8 +1,5 @@
-smartos ansible_host=smartos ansible_user=root ansible_ssh_pass=root ansible_python_interpreter=/opt/tools/bin/python
+smartos         ansible_host=192.168.100.2 ansible_user=root ansible_ssh_pass=root ansible_python_interpreter=/opt/tools/bin/python
+smartos_bastion ansible_host=192.168.100.3 ansible_user=root internal_network_ip=192.168.101.1 gateway=192.168.100.1
 
-[zones:vars]
-ansible_ssh_private_key_file=private.key
-ansible_user=root
-
-[zones]
-zone1 ansible_host=10.76.78.11
+[internal]
+zone1           ansible_host=192.168.101.2 ansible_user=root

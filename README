@@ -9,20 +9,16 @@ You might need to pip install appdirs separately prior to that.
 
 Install Python on SmartOS so it can be managed by Ansible:
 
-$ ansible-playbook -i hosts bootstrap_ansible.yml
+$ ansible-playbook smartos_bootstrap_ansible/bootstrap_ansible.yml
 
-Create an etherstub:
+Create the lab:
 
-$ ansible-playbook setup_etherstub.yml
+$ ansible-playbook lab.yml
 
-Create a pair of CentOS 7 LX Zones:
+Log to bastion:
 
-$ ansible-playbook create_centos.yml
+$ ssh root@192.168.100.3
 
-You should now be able to access zone1 with Ansible's inventory:
+Log to internal zone:
 
-$ ansible -m ping zone1
-
-And access the internal zone2 through zone1:
-
-$ ssh -i private.key -o ProxyCommand="ssh -i private.key -W %h:%p root@10.76.78.11" root@10.76.79.2
+$ ssh -o ProxyCommand="ssh -W %h:%p root@192.168.100.3" root@192.168.101.2

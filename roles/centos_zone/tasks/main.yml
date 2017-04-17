@@ -1,0 +1,17 @@
+---
+- name: import image
+  imgadm:
+    uuid: "{{ centos_zone_img_uuid }}"
+    state: imported
+- name: create centos zone
+  vmadm:
+    brand: lx
+    state: present
+    alias: "{{ host_name }}"
+    hostname: "{{ host_name }}"
+    image_uuid: "{{ centos_zone_img_uuid }}"
+    resolvers: "{{ resolvers }}"
+    nics: "{{ nics }}"
+    kernel_version: 3.10.0
+    customer_metadata:
+      root_authorized_keys: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

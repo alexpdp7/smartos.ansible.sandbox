@@ -2,5 +2,5 @@
 - hosts: smartos
   gather_facts: False
   tasks:
-    - script: files/ansible_bootstrap_script
+    - script: ansible_bootstrap_script
 

@@ -1,0 +1,39 @@
+---
+- hosts: smartos
+  roles:
+    - role: etherstub
+    - role: centos_kvm
+      host_name: bastion
+      resolvers: [ "8.8.8.8" ]
+      ram_mb: 256
+      vcpus: 1
+      nics:
+      - nic_tag: admin
+        ip: "{{ hostvars['smartos_bastion']['ansible_host'] }}"
+        netmask: 255.255.255.0
+        gateway: "{{ hostvars['smartos_bastion']['gateway'] }}"
+        model: virtio
+        primary: true
+        allow_mac_spoofing: true
+      - nic_tag: switch0
+        ip: "{{ hostvars['smartos_bastion']['internal_network_ip'] }}"
+        netmask: 255.255.255.0
+        model: virtio
+        allow_dhcp_spoofing: true
+        dhcp_server: true
+
+- hosts: smartos_bastion
+  roles:
+    - role: bastion
+
+- hosts: smartos
+  roles:
+    - role: centos_zone
+      host_name: zone1
+      resolvers: [ "8.8.8.8" ]
+      nics:
+      - nic_tag: switch0
+        ip: 192.168.101.2
+        netmask: 255.255.255.0
+        gateway: "{{ hostvars['smartos_bastion']['internal_network_ip'] }}"
+        primary: true

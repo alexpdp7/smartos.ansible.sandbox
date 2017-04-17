@@ -1,0 +1,7 @@
+---
+- name: setup nat eth0
+  command: firewall-cmd --change-interface eth0 --zone external
+- name: setup nat eth1
+  command: firewall-cmd --change-interface eth1 --zone internal
+- name: reload firewall
+  command: firewall-cmd --reload

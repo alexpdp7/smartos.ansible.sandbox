@@ -1,0 +1,22 @@
+---
+- name: import image
+  imgadm:
+    uuid: "{{ centos_kvm_img_uuid }}"
+    state: imported
+- name: create centos kvm
+  vmadm:
+    brand: kvm
+    state: present
+    alias: "{{ host_name }}"
+    hostname: "{{ host_name }}"
+    resolvers: "{{ resolvers }}"
+    ram: "{{ ram_mb }}"
+    vcpus: "{{ vcpus }}"
+    nics: "{{ nics }}"
+    disks:
+    - image_uuid: "{{ centos_kvm_img_uuid }}"
+      boot: true
+      model: virtio
+    vnc_port: -1
+    customer_metadata:
+      root_authorized_keys: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

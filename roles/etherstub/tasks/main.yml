@@ -1,0 +1,2 @@
+- name: setup_etherstub
+  shell: nictagadm list -l -p | grep switch0 || nictagadm add -l switch0
